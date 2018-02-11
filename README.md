@@ -1,6 +1,6 @@
 # Android PhoneTracker (Kotlin)
 
-This is an application that tracks the GPS location, signal strength of all surrounding cells (if available, see https://stackoverflow.com/a/18688268/5200303) and device identifieres (imsi, imei, androidId, etc.) of an Android device and ingests the data to a Microsoft Azure EventHub instance.
+This is an application that tracks the GPS location, signal strength of all surrounding cells (if available, see https://stackoverflow.com/a/18688268/5200303) and device identifiers (imsi, imei, androidId, etc.) of an Android device and ingests the data to a Microsoft Azure EventHub instance.
 
 ## Connect your Azure Account
 
