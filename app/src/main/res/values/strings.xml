@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">PhoneTracker</string>
+    <string name="LOCATION_PERMISSION">Needs Location Permission</string>
+</resources>
