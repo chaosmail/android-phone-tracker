@@ -39,8 +39,11 @@ class NetworkInfo(private val activity: Activity, private val telephonyManager: 
     init {
         phoneistener = SignalStrengthListener()
 
+        @Suppress("DEPRECATION")
         telephonyManager.listen(phoneistener,
-                PhoneStateListener.LISTEN_CELL_LOCATION or PhoneStateListener.LISTEN_SIGNAL_STRENGTHS)
+                PhoneStateListener.LISTEN_SIGNAL_STRENGTH
+                        or PhoneStateListener.LISTEN_SIGNAL_STRENGTHS
+                        or PhoneStateListener.LISTEN_CELL_LOCATION)
     }
 
     override fun onBind(p0: Intent?): IBinder {
