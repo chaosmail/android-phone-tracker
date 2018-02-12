@@ -15,10 +15,10 @@ data class NormalizedLocationInfo(val longitude: Double, val latitude: Double)
 class LocationInfo (private val activity: Activity, private val locationManager: LocationManager): LocationListener {
 
     // The minimum distance to change Updates in meters
-    private val MIN_UPDATE_DISTANCE: Float = 10.0f
+    private val MIN_UPDATE_DISTANCE: Float = 1.0f
 
     // The minimum time between updates in milliseconds
-    private val MIN_UPDATE_TIME = (1000 * 60).toLong()
+    private val MIN_UPDATE_TIME = 1000 * 1L
 
     private var location: Location? = null
 
@@ -37,18 +37,21 @@ class LocationInfo (private val activity: Activity, private val locationManager:
 
         try {
             if (isNetworkEnabled) {
+                // register location change handler
                 locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
                         MIN_UPDATE_TIME,
                         MIN_UPDATE_DISTANCE, this)
 
+                // get the last known location to start
                 location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
             }
             // If GPS enabled, get latitude/longitude using GPS Services
             else if (isGPSEnabled) {
+                // register location change handler
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                         MIN_UPDATE_TIME,
                         MIN_UPDATE_DISTANCE, this)
-
+                // get the last known location to start
                 location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
             }
         } catch (e: SecurityException) {
@@ -73,7 +76,9 @@ class LocationInfo (private val activity: Activity, private val locationManager:
         return null
     }
 
-    override fun onLocationChanged(p0: android.location.Location?) {}
+    override fun onLocationChanged(newLocation: android.location.Location?) {
+        location = newLocation // update location
+    }
     override fun onStatusChanged(p0: String?, p1: Int, p2: Bundle?) {}
     override fun onProviderEnabled(p0: String?) {}
     override fun onProviderDisabled(p0: String?) {}
